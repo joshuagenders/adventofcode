@@ -8,33 +8,25 @@ const input_list = [
 ]
 
 const match = (val) => ({
-    when(regx, fn){
-        return regx.test(val) ? matched(fn(val)) : match(val)
-    },
-    otherwise(fn){
-        return fn(val)
-    }
+    when: (regx, fn) => regx.test(val) ? matched(fn(val)) : match(val),
+    otherwise:(fn) => fn(val)
 })
 const matched = (val) => ({
-    when(){
-        return matched(val)
-    },
-    otherwise(){
-        return val
-    }
+    when: () => matched(val),
+    otherwise: () => val
 })
 
 const getAmount = val => parseInt(val.split(' ')[1], 10)
-const forward = acc => v => { acc[0] += getAmount(v); return acc; } 
-const down = acc => v => { acc[1] += getAmount(v); return acc;  } 
-const up = acc => v => { acc[1] -= getAmount(v); return acc;  } 
+const forward = acc => v => [acc[0] + getAmount(v), acc[1]] 
+const down = acc => v => [acc[0], acc[1] + getAmount(v)] 
+const up = acc => v => [acc[0], acc[1] - getAmount(v)] 
 
-const result = input_list.reduce((acc, v) => match(v)
+const [horizontalPosition, depth] = input_list.reduce((acc, v) => match(v)
     .when(/forward/, forward(acc))
     .when(/down/, down(acc))
     .when(/up/, up(acc))
     .otherwise(() => acc), [0, 0])
 
-console.log(result)
-console.log(result[0] * result[1])
+console.log({horizontalPosition, depth})
+console.log(horizontalPosition * depth)
 
