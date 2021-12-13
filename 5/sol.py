@@ -9,7 +9,18 @@ values = """0,9 -> 5,9
 0,0 -> 8,8
 5,5 -> 8,2"""
 
-parsed = list(map(lambda x: list(map(lambda y: list(map(int, y.split(','))), x.split(' -> '))), values.splitlines()))
+parsed = list(
+    map(
+        lambda x: list(map(
+            lambda y: list(map(
+                int,
+                y.split(',')
+            )),
+            x.split(' -> ')
+        )),
+        values.splitlines()
+    )
+)
 points = {}
 for start, finish in parsed:
     x, y = start
