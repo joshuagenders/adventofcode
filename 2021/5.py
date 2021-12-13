@@ -1,3 +1,4 @@
+# Consider only horizontal and vertical lines. At how many points do at least two lines overlap?
 values = """0,9 -> 5,9
 8,0 -> 0,8
 9,4 -> 3,4

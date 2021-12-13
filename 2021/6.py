@@ -1,3 +1,4 @@
+# Find a way to simulate lanternfish. How many lanternfish would there be after 80 days?
 initial_state = [ 3, 4, 3, 1, 2 ]
 
 queue = []

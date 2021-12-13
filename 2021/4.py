@@ -1,3 +1,9 @@
+# The submarine has a bingo subsystem to help passengers 
+# (currently, you and the giant squid) pass the time.
+# Start by finding the sum of all unmarked numbers on that board. 
+# Then, multiply that sum by the number that was just called when the board won to get the final score.
+# To guarantee victory against the giant squid, figure out which board will win first.
+# What will your final score be if you choose that board?
 
 board_text = """
 22 13 17 11  0
