@@ -17,6 +17,7 @@ const matched = (val) => ({
 })
 
 const getAmount = val => parseInt(val.split(' ')[1], 10)
+// apply transformations to [horizontalPosition, depth] vector
 const forward = acc => v => [acc[0] + getAmount(v), acc[1]] 
 const down = acc => v => [acc[0], acc[1] + getAmount(v)] 
 const up = acc => v => [acc[0], acc[1] - getAmount(v)] 
