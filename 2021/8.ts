@@ -15,15 +15,20 @@ const uniqueLengths = (words: string[]) => {
     return lengths.filter(l => lengths.filter(r => r === l).length === 1)
 }
 
-const parser = (line: string) : string[][] =>
-    line.split('|').map(v => v.trim()).map(l => l.split(' '))
+const parser = (line: string) : {combinations: string[], output: string[]} => {
+    const values = line
+        .split('|')
+        .map(v => v.trim())
+    return {
+        combinations: values[0].split(' '),
+        output: values[1].split(' ')
+    }
+}
 
 const parsed = text.split("\n").map(parser)
 const sumOfUniqueCombinations = parsed.map(line => {
-    const combinations = line[0]
-    const output = line[1]
-    const counts = uniqueLengths(combinations)
-    const countOfUnique = output.filter(o => counts.includes(o.length)).length
+    const counts = uniqueLengths(line.combinations)
+    const countOfUnique = line.output.filter(o => counts.includes(o.length)).length
     return countOfUnique
 }).reduce((acc, v) => acc + v, 0)
 console.log(sumOfUniqueCombinations)

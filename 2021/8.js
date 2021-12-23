@@ -2,22 +2,21 @@ var text = "be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe
 var uniqueLengths = function (words) {
     var lengths = words
         .map(function (word) { return word.length; });
-    return lengths.filter(function (l) { return lengths.filter(function (r) { return r == l; }).length == 1; });
+    return lengths.filter(function (l) { return lengths.filter(function (r) { return r === l; }).length === 1; });
 };
 var parser = function (line) {
-    return line.split('|').map(function (v) { return v.trim(); }).map(function (l) { return l.split(' '); });
+    var values = line
+        .split('|')
+        .map(function (v) { return v.trim(); });
+    return {
+        combinations: values[0].split(' '),
+        output: values[1].split(' ')
+    };
 };
 var parsed = text.split("\n").map(parser);
 var sumOfUniqueCombinations = parsed.map(function (line) {
-    var combinations = line[0];
-    var output = line[1];
-    var counts = uniqueLengths(combinations);
-    console.log(combinations);
-    console.log(counts);
-    console.log(output);
-    var countOfUnique = output.filter(function (o) { return counts.includes(o.length); }).length;
-    console.log(countOfUnique);
-    console.log("===============");
+    var counts = uniqueLengths(line.combinations);
+    var countOfUnique = line.output.filter(function (o) { return counts.includes(o.length); }).length;
     return countOfUnique;
 }).reduce(function (acc, v) { return acc + v; }, 0);
 console.log(sumOfUniqueCombinations);
