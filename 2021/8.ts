@@ -12,7 +12,7 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
 const uniqueLengths = (words: string[]) => {
     const lengths = words
         .map(word => word.length)
-    return lengths.filter(l => lengths.filter(r => r === l).length == 1)
+    return lengths.filter(l => lengths.filter(r => r === l).length === 1)
 }
 
 const parser = (line: string) : string[][] =>
