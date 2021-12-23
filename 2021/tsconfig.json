@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "noImplicitAny": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "target": "es5",
+        "lib": [
+            "es2021",
+            "dom"
+        ],
+    },
+    "files": [
+      "8.ts"
+    ]
+}
