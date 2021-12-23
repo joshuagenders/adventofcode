@@ -23,12 +23,7 @@ const sumOfUniqueCombinations = parsed.map(line => {
     const combinations = line[0]
     const output = line[1]
     const counts = uniqueLengths(combinations)
-    console.log(combinations)
-    console.log(counts)
-    console.log(output)
     const countOfUnique = output.filter(o => counts.includes(o.length)).length
-    console.log(countOfUnique)
-    console.log("===============")
     return countOfUnique
 }).reduce((acc, v) => acc + v, 0)
 console.log(sumOfUniqueCombinations)
