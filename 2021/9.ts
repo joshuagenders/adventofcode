@@ -49,8 +49,8 @@ const adjecentPoints = (index: Index) : number[] =>
     [above, below, left, right]
         .map(fn => fn(index))
         .filter(isDefined) as number[]
-const pointHigher = ({row, col}: Index) => (n: number) =>
-    heightMap[row][col] < n
+const pointHigher = (index: Index) => (n: number) =>
+    valueAt(index) < n
 const isLowest = (index: Index) =>
     adjecentPoints(index).every(pointHigher(index))
 
