@@ -28,34 +28,37 @@ const heightMapString = `2199943210
 8767896789
 9899965678`
 
+const isDefined = (x: any) : boolean => x !== undefined
+const range = (n: number) => [...Array(n).keys()]
+const addOne = (n: number) => n + 1
+const sum = (value: number, accumulator: number) => value + accumulator
+
 const toNumber = (n: string) => parseInt(n, 10)
 const stringToNumberArray = (s: string) => [...s].map(toNumber)
 const heightMap = heightMapString.split('\n').map(stringToNumberArray)
 const columns = heightMap[0].length
 const rows = heightMap.length
-const above = (row: number, col: number) => row > 0 ? heightMap[row-1][col] : undefined
-const below = (row: number, col: number) =>  row < rows - 1 ? heightMap[row+1][col] : undefined
-const left = (row: number, col: number) => col > 0 ? heightMap[row][col-1] : undefined
-const right = (row: number, col: number) => col < columns - 1 ? heightMap[row][col+1] : undefined
-const isDefined = (x: any) : boolean => x !== undefined
-const adjecentPoints = (x: number, y: number) : number[] =>
+
+type Index = {row: number, col: number}
+const valueAt = ({row, col}: Index) => heightMap[row][col]
+const above = ({row, col}: Index) => row > 0 ? heightMap[row-1][col] : undefined
+const below = ({row, col}: Index) =>  row < rows - 1 ? heightMap[row+1][col] : undefined
+const left = ({row, col}: Index) => col > 0 ? heightMap[row][col-1] : undefined
+const right = ({row, col}: Index) => col < columns - 1 ? heightMap[row][col+1] : undefined
+const adjecentPoints = (index: Index) : number[] =>
     [above, below, left, right]
-        .map(fn => fn(x, y))
+        .map(fn => fn(index))
         .filter(isDefined) as number[]
-const pointHigher = (row: number, col: number) => (n: number) =>
+const pointHigher = ({row, col}: Index) => (n: number) =>
     heightMap[row][col] < n
-const isLowest = (row: number, col: number) =>
-    adjecentPoints(row, col).every(pointHigher(row, col))
+const isLowest = (index: Index) =>
+    adjecentPoints(index).every(pointHigher(index))
 
-const range = (n: number) => [...Array(n).keys()]
-const addOne = (n: number) => n + 1
-const sum = (value: number, accumulator: number) => value + accumulator
 const indexes = range(rows)
-    .flatMap(x => range(columns).map(y => ({x, y})))
-
+    .flatMap(row => range(columns).map(col => ({row, col})))
 const solution = indexes
-    .filter(({x, y}) => isLowest(x, y))
-    .map(({x, y}) => heightMap[x][y])
+    .filter(isLowest)
+    .map(valueAt)
     .map(addOne)
     .reduce(sum, 0)
 
