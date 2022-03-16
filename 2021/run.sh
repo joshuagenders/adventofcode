@@ -9,3 +9,4 @@ python ./6.py
 python ./7.py
 deno run ./8.ts
 deno run ./9.ts
+deno run ./10.ts
