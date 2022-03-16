@@ -7,3 +7,5 @@ python ./4.py
 python ./5.py
 python ./6.py
 python ./7.py
+deno run ./8.ts
+deno run ./9.ts
