@@ -31,7 +31,7 @@ const heightMapString = `2199943210
 const isDefined = (x: any) : boolean => x !== undefined
 const range = (n: number) => [...Array(n).keys()]
 const addOne = (n: number) => n + 1
-const sum = (value: number, accumulator: number) => value + accumulator
+const sum = (accumulator: number, nextValue: number) => accumulator + nextValue
 
 const toNumber = (n: string) => parseInt(n, 10)
 const stringToNumberArray = (s: string) => [...s].map(toNumber)
