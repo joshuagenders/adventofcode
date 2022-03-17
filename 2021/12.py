@@ -161,10 +161,6 @@ for edge in data.split('\n'):
     left.add_edge(right)
     right.add_edge(left)
 
-
-start_node = left = next(filter(lambda x: x.name == 'start', nodes))
-
-
 paths = []
 
 
@@ -181,6 +177,7 @@ def traverse_nodes(starting_at, visited=[]):
         paths.append(visited)
 
 
+start_node = next(filter(lambda x: x.name == 'start', nodes))
 traverse_nodes(start_node)
 
 print(len(paths))

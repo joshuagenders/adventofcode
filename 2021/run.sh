@@ -10,3 +10,5 @@ python ./7.py
 deno run ./8.ts
 deno run ./9.ts
 deno run ./10.ts
+python ./11.py
+python ./12.py
