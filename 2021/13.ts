@@ -129,12 +129,14 @@ const data = `6,10
 9,0`
 
 const toInt = (s: string) => parseInt(s, 10)
-const points = data.split('\n').map(line => line.split(',').map(toInt))
-const maxY = points.reduce((acc, v) => v[1] > acc ? v[1] : acc, points[0][0])
-const foldY = (along: number) => (points: number[][]) => 
-    points.map((point) => point[1] < along ? point : [point[0], maxY - point[1]])
-const uniqueValues = (acc: number[][], v: number[]) => 
-    acc.some(a => a[0] === v[0] && a[1] === v[1]) ? acc : [...acc, v]
+type Vector = { x: number, y: number } 
+const toVector = (n: number[]) : Vector => ({ x: n[0], y: n[1] })
+const points = data.split('\n').map(line => line.split(',').map(toInt)).map(toVector)
+const maxY = points.reduce((acc, { y }) => y > acc ? y : acc, points[0].y)
+const foldY = (along: number) => (points: Vector[]) => 
+    points.map((point) => point.y < along ? point : { x: point.x, y: maxY - point.y})
+const uniqueValues = (acc: Vector[], v: Vector) => 
+    acc.some(a => a.x === v.x && a.y === v.y) ? acc : [...acc, v]
 const foldedOnce = foldY(7)(points)
 const uniquePoints = foldedOnce.reduce(uniqueValues, [])
 console.log(uniquePoints.length)
