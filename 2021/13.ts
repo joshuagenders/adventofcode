@@ -134,9 +134,10 @@ const toVector = (n: number[]) : Vector => ({ x: n[0], y: n[1] })
 const points = data.split('\n').map(line => line.split(',').map(toInt)).map(toVector)
 const maxY = points.reduce((acc, { y }) => y > acc ? y : acc, points[0].y)
 const foldY = (along: number) => (points: Vector[]) => 
-    points.map((point) => point.y < along ? point : { x: point.x, y: maxY - point.y})
+    points.map((point) => point.y < along ? point : { x: point.x, y: maxY - point.y })
+const vectorEq = (v: Vector) => (a: Vector) => a.x === v.x && a.y === v.y
 const uniqueValues = (acc: Vector[], v: Vector) => 
-    acc.some(a => a.x === v.x && a.y === v.y) ? acc : [...acc, v]
+    acc.some(vectorEq(v)) ? acc : [...acc, v]
 const foldedOnce = foldY(7)(points)
 const uniquePoints = foldedOnce.reduce(uniqueValues, [])
 console.log(uniquePoints.length)
