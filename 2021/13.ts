@@ -130,7 +130,7 @@ const data = `6,10
 
 const toInt = (s: string) => parseInt(s, 10)
 const points = data.split('\n').map(line => line.split(',').map(toInt))
-const maxY = points.reduce((acc, v) => v[1] > acc ? v[1] : acc, points[0][1])
+const maxY = points.reduce((acc, v) => v[1] > acc ? v[1] : acc, points[0][0])
 const foldY = (along: number) => (points: number[][]) => 
     points.map((point) => point[1] < along ? point : [point[0], maxY - point[1]])
 const uniqueValues = (acc: number[][], v: number[]) => 
