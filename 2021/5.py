@@ -43,4 +43,3 @@ for start, finish in parsed:
             else:
                 points[key] = 1
 print(len(list(filter(lambda v: v[1] > 1, points.items()))))
-

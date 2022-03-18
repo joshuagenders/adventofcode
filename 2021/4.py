@@ -1,6 +1,6 @@
-# The submarine has a bingo subsystem to help passengers 
+# The submarine has a bingo subsystem to help passengers
 # (currently, you and the giant squid) pass the time.
-# Start by finding the sum of all unmarked numbers on that board. 
+# Start by finding the sum of all unmarked numbers on that board.
 # Then, multiply that sum by the number that was just called when the board won to get the final score.
 # To guarantee victory against the giant squid, figure out which board will win first.
 # What will your final score be if you choose that board?
@@ -43,7 +43,8 @@ for line in board_text.splitlines():
 if current_board:
     boards.append(current_board)
     board_sums.append(board_sum)
-numbers = [7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1]
+numbers = [7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10,
+           16, 13, 6, 15, 25, 12, 22, 18, 20, 8, 19, 3, 26, 1]
 
 print('boards')
 print(boards)
@@ -66,8 +67,10 @@ for board_index, board in enumerate(boards):
 print(tables)
 
 scores = {}
-row_key = lambda board, row : (board, 'row', row)
-col_key = lambda board, col : (board, 'col', col)
+def row_key(board, row): return (board, 'row', row)
+def col_key(board, col): return (board, 'col', col)
+
+
 def mark(board, row, col):
     r_key = row_key(board, row)
     c_key = col_key(board, col)
@@ -84,6 +87,7 @@ def mark(board, row, col):
     else:
         scores[c_key] = 1
     return False
+
 
 winners = []
 winning_turn = 0
