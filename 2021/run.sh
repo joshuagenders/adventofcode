@@ -1,14 +1,14 @@
 #!/bin/bash
-python ./1.py
-node ./2_0.js
-node ./2_1.js
-python ./3.py
-python ./4.py
-python ./5.py
-python ./6.py
-python ./7.py
-deno run ./8.ts
-deno run ./9.ts
+python ./01.py
+node ./02_0.js
+node ./02_1.js
+python ./03.py
+python ./04.py
+python ./05.py
+python ./06.py
+python ./07.py
+deno run ./08.ts
+deno run ./09.ts
 deno run ./10.ts
 python ./11.py
 python ./12.py
