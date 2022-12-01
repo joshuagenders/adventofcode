@@ -1,7 +1,6 @@
 import arrays
 input := (
-	'
-1000
+'1000
 2000
 3000
 
@@ -14,8 +13,7 @@ input := (
 8000
 9000
 
-10000
-	'
+10000'
 )
 
 values := input.split_into_lines()
