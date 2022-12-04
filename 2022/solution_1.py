@@ -45,22 +45,25 @@
 # Find the Elf carrying the most Calories. How many total Calories is that Elf carrying?
 from functools import reduce
 
-input_raw = '''
-1000
-2000
-3000
+# input_raw = '''
+# 1000
+# 2000
+# 3000
 
-4000
+# 4000
 
-5000
-6000
+# 5000
+# 6000
 
-7000
-8000
-9000
+# 7000
+# 8000
+# 9000
 
-10000
-'''
+# 10000
+# '''
+
+with open('1.input.txt', 'r') as fh:
+    input_raw = fh.read()
 
 def functional():
     elf_with_most_calories = max(
