@@ -89,16 +89,15 @@ stacks = list(
 )
 
 remove_empty = lambda l: list(filter(lambda x: x.strip() != '', l))
-stacks = list(map(remove_empty, stacks))
-print (*stacks, sep='\n')
+final_stacks = list(map(remove_empty, stacks))
 
 parse_line = lambda line: list(map(int, re.match('move (\d+) from (\d+) to (\d+)', line).groups()))
-parsed_instructions = map(parse_line, instructions.splitlines())
+parsed_instructions = list(map(parse_line, instructions.splitlines()))
 for cnt, frm, to in parsed_instructions:
     for i in range(cnt):
-        stacks[to - 1].append(stacks[frm - 1].pop())
+        final_stacks[to - 1].append(final_stacks[frm - 1].pop())
 
-result = ''.join(map(lambda x: x.pop(), stacks)).replace('[','').replace(']','').replace(' ','')
+result = ''.join(map(lambda x: x.pop(), final_stacks)).replace('[','').replace(']','').replace(' ','')
 print(result)
 
 
@@ -151,3 +150,18 @@ print(result)
 # In this example, the CrateMover 9001 has put the crates in a totally different order: MCD.
 
 # Before the rearrangement process finishes, update your simulation so that the Elves know where they should stand to be ready to unload the final supplies. After the rearrangement procedure completes, what crate ends up on top of each stack?
+
+final_stacks = list(map(remove_empty, stacks))
+print (*final_stacks, sep='\n')
+
+for cnt, frm, to in parsed_instructions:
+    # print(f'move {cnt} from {frm} to {to}')
+    # print (*final_stacks, sep='\n')
+    # print('--->')
+    final_stacks[to - 1].extend(final_stacks[frm - 1][-cnt:])
+    final_stacks[frm - 1] = final_stacks[frm - 1][:-cnt]
+    # print (*final_stacks, sep='\n')
+    # print('---')
+
+result = ''.join(map(lambda x: x.pop(), final_stacks)).replace('[','').replace(']','').replace(' ','')
+print(result)
