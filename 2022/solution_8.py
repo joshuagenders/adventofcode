@@ -39,7 +39,6 @@
 with open('8.input.txt', 'r') as fh:
     raw_input = fh.read()
 
-visible_trees = 0
 lines = raw_input.splitlines()
 visibility: list[list[int]] = [[0] * len(lines) for _ in range(len(lines[0]))]
 
