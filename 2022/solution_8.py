@@ -136,8 +136,8 @@ for rotation in range(4):
     results = rotate_90(results)
 
 max_tree_score = 0
-for x, line in enumerate(results):
-    for y, tree in enumerate(line):
+for line in results:
+    for tree in line:
         score = reduce(lambda x, y: x * y, tree, 1)
         if score > max_tree_score:
             max_tree_score = score
