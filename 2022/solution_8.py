@@ -30,6 +30,9 @@
 
 # Consider your map; how many trees are visible from outside the grid?
 
+from functools import reduce
+
+
 # raw_input = """30373
 # 25512
 # 65332
@@ -63,9 +66,11 @@ print(visible_trees)
 
 # Content with the amount of tree cover available, the Elves just need to know the best spot to build their tree house: they would like to be able to see a lot of trees.
 
-# To measure the viewing distance from a given tree, look up, down, left, and right from that tree; stop if you reach an edge or at the first tree that is the same height or taller than the tree under consideration. (If a tree is right on the edge, at least one of its viewing distances will be zero.)
+# To measure the viewing distance from a given tree, look up, down, left, and right from that tree; stop if you reach an edge or at the first tree that is the same height or taller than the tree under consideration.
+#  (If a tree is right on the edge, at least one of its viewing distances will be zero.)
 
-# The Elves don't care about distant trees taller than those found by the rules above; the proposed tree house has large eaves to keep it dry, so they wouldn't be able to see higher than the tree house anyway.
+# The Elves don't care about distant trees taller than those found by the rules above; the proposed tree house has large eaves to keep it dry,
+#  so they wouldn't be able to see higher than the tree house anyway.
 
 # In the example above, consider the middle 5 in the second row:
 
@@ -98,3 +103,43 @@ print(visible_trees)
 # This tree's scenic score is 8 (2 * 2 * 1 * 2); this is the ideal spot for the tree house.
 
 # Consider each tree on your map. What is the highest scenic score possible for any tree?
+
+parsed_lines = []
+results: list[list[int]] = []
+for line in lines:
+    x = []
+    row = []
+    for c in line:
+        x.append(int(c))
+        row.append([])
+    parsed_lines.append(x)
+    results.append(row)
+
+max_x = len(lines)
+max_y = len(lines[0])
+
+for rotation in range(4):
+    for x, line in enumerate(parsed_lines):
+        to_consider = []
+        for y, tree in enumerate(line):
+            score = 0
+            if not to_consider:
+                results[x][y].append(0)
+            else:
+                for other in reversed(to_consider):
+                    score += 1
+                    if other >= tree:
+                        break
+                results[x][y].append(score)
+            to_consider.append(tree)
+    parsed_lines = rotate_90(parsed_lines)
+    results = rotate_90(results)
+
+max_tree_score = 0
+for x, line in enumerate(results):
+    for y, tree in enumerate(line):
+        score = reduce(lambda x, y: x * y, tree, 1)
+        if score > max_tree_score:
+            max_tree_score = score
+
+print(max_tree_score)
