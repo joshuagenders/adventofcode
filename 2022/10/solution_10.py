@@ -185,3 +185,30 @@ while instruction_stack:
         signal_strength += cycle * x
     x += dx
 print(signal_strength)
+
+## part 2
+instruction_stack = list(map(to_instr, raw_input.splitlines()))
+
+current_instruction = instruction_stack.pop(0)()
+cycle = 0
+# for cycle in range(1, 221):
+screen_buffer = ''
+while instruction_stack:
+    cycle += 1
+    dx = current_instruction.__next__()
+
+    if dx is None:
+        current_instruction = instruction_stack.pop(0)()
+        dx = current_instruction.__next__()
+
+    x += dx
+    current_px = cycle % 40
+    print(current_px)
+    if current_px in [x-1, x, x + 1]:
+        screen_buffer += '#'
+    else:
+        screen_buffer += '.'
+    if current_px == 0:
+        screen_buffer += '\n'
+
+print(screen_buffer)
