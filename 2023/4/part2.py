@@ -28,9 +28,8 @@ copies = [1]*len(games)
 i = 0
 while (i < len(copies)):
   amount = winning[i]
-  for _ in range(copies[i]):
-    for card in range(i + 1, i + 1 + amount):
-      copies[card] += 1
+  for card in range(i + 1, i + 1 + amount):
+    copies[card] += copies[i]
   i += 1
 
 print(sum(copies))
