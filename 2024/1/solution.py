@@ -23,15 +23,14 @@ combined = zip(l, r)
 diffs = sum([abs(int(x[0]) - int(x[1])) for x in combined])
 print (diffs)
 
-m = {}
-def identity(a):
-    def id(b):
+def equality(a):
+    def eq(b):
         return a == b
-    return id
+    return eq
 
 total = 0
 for n in l:
-    times = len([x for x in filter(identity(n), r)])
+    times = len([x for x in filter(equality(n), r)])
     total += int(n) * times
     # print (f'{n} appears {times} times')
 
