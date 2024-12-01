@@ -23,11 +23,5 @@ right = extract_sorted_column(1, lines)
 diff = sum([abs(x[0] - x[1]) for x in zip(left, right)])
 print (diff)
 
-equality = lambda a: lambda b: a == b
-
-total = 0
-for n in left:
-    times = len([x for x in filter(equality(n), right)])
-    total += n * times
-
-print(total)
+similarity_score = sum([n * right.count(n) for n in left])
+print(similarity_score)
